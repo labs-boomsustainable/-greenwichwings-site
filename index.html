@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Greenwichwings — Flights & Travel Consultation</title>
+<meta name="description" content="Greenwichwings is a global-standard travel agency for flight bookings and abroad travel consultation. Your Journey. Our Expertise. One World. Book a free session today.">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#14432A;
+    --forest-2:#1B5A38;
+    --leaf:#7CB342;
+    --leaf-bright:#9CCC65;
+    --mist:#F4F8F2;
+    --ink:#1C2B21;
+    --muted:#5B6E60;
+    --muted-light:#B9CEBE;
+    --radius:14px;
+    --display:'Cormorant Garamond',Georgia,serif;
+    --body:'Jost',system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);color:var(--ink);background:var(--mist);line-height:1.6}
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--leaf);outline-offset:3px}
+
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  section{padding:92px 0}
+  .eyebrow{font-size:.78rem;letter-spacing:.24em;text-transform:uppercase;color:var(--leaf);font-weight:500;margin-bottom:14px}
+  h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.12}
+  h2{font-size:clamp(2rem,4.2vw,2.9rem);margin-bottom:16px}
+  .lede{max-width:580px;color:var(--muted);font-size:1.05rem}
+  .on-green{background:var(--forest);color:var(--mist)}
+  .on-green .lede{color:var(--muted-light)}
+  .btn{display:inline-block;background:var(--leaf);color:#0F2A18;text-decoration:none;font-weight:600;letter-spacing:.05em;padding:14px 32px;border-radius:8px;font-size:.95rem;transition:background .2s,transform .2s}
+  .btn:hover{background:var(--leaf-bright);transform:translateY(-1px)}
+  .btn-ghost{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.45);backdrop-filter:blur(4px)}
+  .btn-ghost:hover{background:rgba(255,255,255,.18)}
+
+  /* ---------- Header ---------- */
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid #DCE8DA}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brand img{height:52px;width:auto}
+  .nav-links{display:flex;gap:28px;align-items:center;list-style:none}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:.92rem;letter-spacing:.04em;transition:color .2s}
+  .nav-links a:hover{color:var(--forest)}
+  .nav .btn{padding:10px 22px}
+  .menu-toggle{display:none;background:none;border:1px solid #CBDCC8;border-radius:6px;color:var(--forest);padding:6px 12px;font-size:1.1rem;cursor:pointer}
+
+  /* ---------- Hero: full-bleed photo ---------- */
+  .hero{
+    position:relative;color:#fff;
+    min-height:min(92vh,820px);
+    display:flex;align-items:center;
+    background:
+      linear-gradient(180deg,rgba(10,33,20,.55) 0%,rgba(10,33,20,.35) 45%,rgba(10,33,20,.78) 100%),
+      var(--forest) url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
+    padding:120px 0 160px;
+  }
+  .hero .tagline{font-family:var(--display);font-style:italic;color:var(--leaf-bright);font-size:1.15rem;letter-spacing:.06em;margin-bottom:18px}
+  .hero h1{font-size:clamp(3rem,7.5vw,5.2rem);max-width:15ch;margin-bottom:22px;text-shadow:0 2px 24px rgba(0,0,0,.35)}
+  .hero h1 em{font-style:italic;color:var(--leaf-bright)}
+  .hero p.sub{max-width:540px;color:#E4EEE6;font-size:1.15rem;margin-bottom:38px;text-shadow:0 1px 12px rgba(0,0,0,.4)}
+  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap}
+
+  /* Booking strip overlapping hero bottom (ref: Travellian) */
+  .strip{position:relative;z-index:5;margin-top:-64px}
+  .strip-inner{background:#fff;border-radius:var(--radius);box-shadow:0 24px 60px rgba(10,33,20,.22);display:grid;grid-template-columns:1fr 1fr 1fr auto;overflow:hidden}
+  .strip-cell{padding:24px 28px;border-right:1px solid #EAF1E8}
+  .strip-cell:last-of-type{border-right:0}
+  .strip-cell .label{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+  .strip-cell .value{font-family:var(--display);font-size:1.25rem;color:var(--ink)}
+  .strip-btn{display:flex;align-items:center;justify-content:center;background:var(--leaf);color:#0F2A18;text-decoration:none;font-weight:600;letter-spacing:.05em;padding:0 40px;font-size:1rem;transition:background .2s}
+  .strip-btn:hover{background:var(--leaf-bright)}
+
+  /* ---------- Destinations (photo cards, ref: World Tours) ---------- */
+  .dest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+  .dest{position:relative;border-radius:var(--radius);overflow:hidden;min-height:340px;display:flex;align-items:flex-end;text-decoration:none;background-color:var(--forest-2);background-size:cover;background-position:center;transition:transform .25s,box-shadow .25s}
+  .dest:hover{transform:translateY(-6px);box-shadow:0 18px 44px rgba(10,33,20,.25)}
+  .dest::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,33,20,0) 40%,rgba(10,33,20,.85) 100%)}
+  .dest .info{position:relative;z-index:2;padding:24px;color:#fff}
+  .dest .info h3{font-size:1.6rem;margin-bottom:2px}
+  .dest .info span{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--leaf-bright)}
+  .dest.tall{grid-row:span 2;min-height:340px}
+  .d-uk{background-image:url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=900&q=80')}
+  .d-canada{background-image:url('https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=900&q=80')}
+  .d-usa{background-image:url('https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=900&q=80')}
+  .d-dubai{background-image:url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=900&q=80')}
+  .d-europe{background-image:url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=900&q=80')}
+
+  /* ---------- Services ---------- */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;margin-top:44px}
+  .card{background:#fff;border:1px solid #DFEADC;border-radius:var(--radius);padding:30px 26px;transition:transform .2s,box-shadow .2s}
+  .card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(20,67,42,.12)}
+  .card .icon{width:46px;height:46px;border-radius:12px;background:var(--forest);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+  .card .icon svg{stroke:var(--leaf-bright);width:22px;height:22px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .card h3{font-size:1.35rem;margin-bottom:8px}
+  .card p{color:var(--muted);font-size:.95rem}
+
+  /* ---------- Why us ---------- */
+  .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:36px;margin-top:44px}
+  .why-item{border-top:2px solid var(--leaf);padding-top:20px}
+  .why-item h3{font-size:1.3rem;margin-bottom:8px;color:var(--leaf-bright)}
+  .why-item p{color:var(--muted-light);font-size:.96rem}
+
+  /* ---------- How it works ---------- */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:26px;margin-top:44px;counter-reset:step}
+  .step{padding:28px 24px 24px;background:#fff;border:1px solid #DFEADC;border-radius:var(--radius)}
+  .step::before{counter-increment:step;content:counter(step,decimal-leading-zero);font-family:var(--display);font-size:2.4rem;color:var(--leaf);display:block;margin-bottom:8px;line-height:1}
+  .step h3{font-size:1.25rem;margin-bottom:6px}
+  .step p{color:var(--muted);font-size:.95rem}
+
+  /* ---------- Booking ---------- */
+  .booking{
+    background:
+      linear-gradient(180deg,rgba(16,42,26,.92),rgba(16,42,26,.92)),
+      var(--forest) url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+    color:var(--mist);
+  }
+  .booking-inner{display:grid;grid-template-columns:1fr 1.4fr;gap:48px;align-items:start;margin-top:10px}
+  .form-shell{background:#fff;border-radius:var(--radius);padding:14px;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+  .form-shell iframe{width:100%;height:1050px;border:0;border-radius:8px}
+  .booking-side ul{list-style:none;margin:22px 0}
+  .booking-side li{padding-left:26px;position:relative;margin-bottom:12px;color:var(--muted-light);font-size:.97rem}
+  .booking-side li::before{content:"";position:absolute;left:0;top:9px;width:12px;height:12px;border-radius:50%;background:var(--leaf)}
+
+  /* ---------- Testimonials ---------- */
+  .quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-top:44px}
+  blockquote{background:#fff;border:1px solid #DFEADC;border-left:3px solid var(--leaf);border-radius:var(--radius);padding:28px 26px;font-size:.98rem}
+  blockquote footer{margin-top:16px;font-size:.85rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+
+  /* ---------- Footer ---------- */
+  .site-footer{background:var(--forest);color:var(--muted-light);padding:64px 0 32px;border-top:3px solid var(--leaf)}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:40px}
+  .site-footer h4{font-family:var(--display);color:var(--mist);font-size:1.15rem;margin-bottom:14px}
+  .site-footer a{color:var(--muted-light);text-decoration:none;transition:color .2s}
+  .site-footer a:hover{color:var(--leaf-bright)}
+  .site-footer ul{list-style:none}
+  .site-footer li{margin-bottom:10px;font-size:.94rem}
+  .disclaimer{border-top:1px solid rgba(185,206,190,.2);padding-top:22px;font-size:.78rem;line-height:1.7;color:#8FA795;max-width:900px}
+  .disclaimer strong{color:var(--muted-light)}
+  .footnote{padding-top:20px;font-size:.82rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:900px){
+    .dest-grid{grid-template-columns:1fr 1fr}
+    .strip-inner{grid-template-columns:1fr 1fr}
+    .strip-btn{grid-column:1/-1;padding:18px}
+  }
+  @media (max-width:820px){
+    .booking-inner{grid-template-columns:1fr}
+    .footer-grid{grid-template-columns:1fr}
+    .nav-links{display:none;position:absolute;top:74px;left:0;right:0;background:#fff;flex-direction:column;padding:20px 24px;gap:18px;border-bottom:1px solid #DCE8DA}
+    .nav-links.open{display:flex}
+    .menu-toggle{display:block}
+    section{padding:64px 0}
+    .hero{padding:90px 0 130px;min-height:78vh}
+    .form-shell iframe{height:1200px}
+  }
+  @media (max-width:560px){
+    .dest-grid{grid-template-columns:1fr}
+    .dest.tall{grid-row:auto}
+    .strip-inner{grid-template-columns:1fr}
+    .strip-cell{border-right:0;border-bottom:1px solid #EAF1E8}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Greenwichwings home">
+      <img src="logo.png" alt="Greenwichwings — Your Journey. Our Expertise. One World.">
+    </a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links" onclick="toggleMenu(this)">☰</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#destinations">Destinations</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#book" class="btn">Book a Free Session</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="tagline">Your Journey. Our Expertise. One World.</p>
+      <h1>It's a big world. <em>Go and live it.</em></h1>
+      <p class="sub">Greenwichwings handles your flights and guides your journey abroad — study, work, or relocation — starting with a consultation that costs you nothing.</p>
+      <div class="hero-ctas">
+        <a class="btn" href="#book">Book a Free Session</a>
+        <a class="btn btn-ghost" href="#destinations">Explore Destinations</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking strip -->
+  <div class="wrap strip">
+    <div class="strip-inner">
+      <div class="strip-cell">
+        <div class="label">First Consultation</div>
+        <div class="value">Completely free</div>
+      </div>
+      <div class="strip-cell">
+        <div class="label">Response Time</div>
+        <div class="value">Within 24 hours</div>
+      </div>
+      <div class="strip-cell">
+        <div class="label">Reach Us Anytime</div>
+        <div class="value">WhatsApp &amp; Email</div>
+      </div>
+      <a class="strip-btn" href="#book">Book Now →</a>
+    </div>
+  </div>
+
+  <!-- ============ DESTINATIONS ============ -->
+  <section id="destinations">
+    <div class="wrap">
+      <p class="eyebrow">Popular Destinations</p>
+      <h2>Where will your journey take you?</h2>
+      <p class="lede">The routes our clients travel most — for study, for work, for a whole new life.</p>
+      <div class="dest-grid">
+        <a class="dest tall d-uk" href="#book">
+          <div class="info"><span>Study · Work · Visit</span><h3>United Kingdom</h3></div>
+        </a>
+        <a class="dest d-canada" href="#book">
+          <div class="info"><span>Study · Relocation</span><h3>Canada</h3></div>
+        </a>
+        <a class="dest d-usa" href="#book">
+          <div class="info"><span>Study · Business · Visit</span><h3>United States</h3></div>
+        </a>
+        <a class="dest d-dubai" href="#book">
+          <div class="info"><span>Work · Leisure</span><h3>Dubai, UAE</h3></div>
+        </a>
+        <a class="dest d-europe" href="#book">
+          <div class="info"><span>Study · Visit · Schengen</span><h3>Europe</h3></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section id="services" style="padding-top:0">
+    <div class="wrap">
+      <p class="eyebrow">What We Do</p>
+      <h2>Travel, handled end to end</h2>
+      <p class="lede">From the ticket in your hand to the life waiting on the other side, every detail is managed to a global standard.</p>
+      <div class="cards">
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M2 16l20-6-8 8-2-4-4 2-6 0z"/><path d="M14 18l-2 4"/></svg></div>
+          <h3>Flight Booking</h3>
+          <p>Competitive fares on international and domestic routes, with itineraries built around your schedule and budget.</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg></div>
+          <h3>Study Abroad</h3>
+          <p>Guidance on schools, admissions, and everything a student needs to begin life in a new country with confidence.</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/></svg></div>
+          <h3>Work &amp; Relocation</h3>
+          <p>Practical consultation for professionals and families making the move abroad — planned properly, from day one.</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
+          <h3>Visa Guidance</h3>
+          <p>Clear direction on documentation and requirements, so your application goes in right the first time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY US ============ -->
+  <section id="why" class="on-green">
+    <div class="wrap">
+      <p class="eyebrow">Why Greenwichwings</p>
+      <h2>Trusted from takeoff to touchdown</h2>
+      <div class="why-grid">
+        <div class="why-item">
+          <h3>Global standard</h3>
+          <p>Our processes and partnerships are built to international benchmarks, so the service you receive in Lagos matches what you'd expect anywhere in the world.</p>
+        </div>
+        <div class="why-item">
+          <h3>Honest consultation</h3>
+          <p>Your first session is completely free. We listen to your plans, assess your options, and tell you plainly what's realistic — before anything else.</p>
+        </div>
+        <div class="why-item">
+          <h3>One dedicated team</h3>
+          <p>From your first enquiry to boarding day, you work with people who know your file personally. No call centres, no starting over.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section id="how">
+    <div class="wrap">
+      <p class="eyebrow">How It Works</p>
+      <h2>Three steps to departure</h2>
+      <div class="steps">
+        <div class="step">
+          <h3>Book a free session</h3>
+          <p>Fill the short form below and pick a time that suits you. It takes under two minutes.</p>
+        </div>
+        <div class="step">
+          <h3>Meet your consultant</h3>
+          <p>We discuss your destination, timeline, and options — and map out exactly what your journey requires.</p>
+        </div>
+        <div class="step">
+          <h3>We handle the rest</h3>
+          <p>Flights, guidance, documentation support — managed by our team while you prepare for the journey ahead.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BOOKING ============ -->
+  <section id="book" class="booking">
+    <div class="wrap booking-inner">
+      <div class="booking-side">
+        <p class="eyebrow">Book a Free Session</p>
+        <h2>Start with a conversation</h2>
+        <p class="lede">Your first consultation costs nothing. Tell us where you're headed, and we'll tell you how to get there.</p>
+        <ul>
+          <li>Takes less than two minutes to book</li>
+          <li>Speak with a dedicated travel consultant</li>
+          <li>No obligation — just clear, honest advice</li>
+        </ul>
+      </div>
+      <div class="form-shell">
+        <iframe
+          src="https://docs.google.com/forms/d/e/1FAIpQLSd6g_7NlIVgOd3MtpCMJHel74OcGJFmjFmp0MY8ISQiJTz9DA/viewform?embedded=true"
+          title="Book a free session with Greenwichwings"
+          loading="lazy">Loading…</iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section id="stories">
+    <div class="wrap">
+      <p class="eyebrow">Client Stories</p>
+      <h2>Journeys we've made possible</h2>
+      <div class="quotes">
+        <blockquote>
+          "From my first free session to landing in Toronto, everything was organised. I always knew the next step."
+          <footer>— Student Relocation · Canada</footer>
+        </blockquote>
+        <blockquote>
+          "They found me a fare I couldn't find anywhere else and handled the whole itinerary. Completely stress-free."
+          <footer>— Business Travel · United Kingdom</footer>
+        </blockquote>
+        <blockquote>
+          "Honest advice from day one. They told me what was realistic and then delivered exactly that."
+          <footer>— Family Relocation · United States</footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>Greenwichwings</h4>
+        <p style="max-width:340px;font-size:.94rem">A global-standard travel agency for flight bookings and abroad travel consultation. Your Journey. Our Expertise. One World.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#destinations">Destinations</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#book">Book a Free Session</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:official.gacglobal@gmail.com">official.gacglobal@gmail.com</a></li>
+          <li><a href="tel:+2347036214914">+234 703 621 4914</a></li>
+          <li><a href="https://wa.me/2347036214914" target="_blank" rel="noopener">Chat on WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="disclaimer"><strong>Disclaimer:</strong> Greenwichwings provides travel booking and consultation services only. We are not affiliated with any government or embassy and do not guarantee visa or admission outcomes, which rest solely with the relevant authorities. Flights are subject to airline terms and conditions.</p>
+    <div class="footnote">
+      <span>© 2026 Greenwichwings. All rights reserved.</span>
+      <span>greenwichwings.org</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu(btn){
+    const links = document.getElementById('nav-links');
+    const open = links.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+  }
+  document.querySelectorAll('#nav-links a').forEach(a=>{
+    a.addEventListener('click',()=>{
+      document.getElementById('nav-links').classList.remove('open');
+      document.querySelector('.menu-toggle').setAttribute('aria-expanded','false');
+    });
+  });
+</script>
+
+</body>
+</html>
