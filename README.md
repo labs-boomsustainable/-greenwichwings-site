@@ -1,0 +1,1 @@
+We are building a simple web page, global standard for travel agency; booking of flights, and abroad travel agency consultation. We will Add a book a session, which will be a google form enbeded. Note that you are the developer, this is a no code web site building, and I am the product manager. Let's plan this first
